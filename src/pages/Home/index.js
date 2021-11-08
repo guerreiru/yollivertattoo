@@ -1,14 +1,17 @@
-import React, { useState, useEffect, useMemo } from 'react';
-import { MdAddShoppingCart } from 'react-icons/md';
-
-import { api } from '../../services/api';
-import { ProductList } from './styles';
-import { formatPrice } from '../../util/format';
-import { useCart } from '../../hooks/useCart';
+import React, { useState, useEffect, useMemo } from "react";
+import { MdAddShoppingCart } from "react-icons/md";
+import { api } from "../../services/api";
+import { ProductList } from "./styles";
+import { formatPrice } from "../../util/format";
+import { useCart } from "../../hooks/useCart";
+import { Link, useHistory } from "react-router-dom";
+import { UserContext } from "../../context/UserContext";
 
 const Home = () => {
   const [products, setProducts] = useState([]);
   const { addProduct, cart } = useCart();
+  const history = useHistory();
+  const { logado, setLogado } = React.useContext(UserContext);
 
   const cartItemsAmount = useMemo(
     () =>
@@ -22,8 +25,8 @@ const Home = () => {
 
   useEffect(() => {
     async function loadProducts() {
-      const response = await api.get('products');
-      const data = response.data.map(product => ({
+      const response = await api.get("products");
+      const data = response.data.map((product) => ({
         ...product,
         priceFormatted: formatPrice(product.price),
       }));
@@ -33,13 +36,19 @@ const Home = () => {
     loadProducts();
   }, []);
 
+  React.useEffect(() => {
+    if (logado) {
+      history.push("/home");
+    }
+  }, [logado, history]);
+
   function handleAddProduct(id) {
     addProduct(id);
   }
 
   return (
     <ProductList>
-      {products.map(product => (
+      {products.map((product) => (
         <li key={product.id}>
           <strong>{product.title}</strong>
           <span>{product.priceFormatted}</span>
