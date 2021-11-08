@@ -6,10 +6,10 @@ import NewProduct from './pages/NewProduct';
 import Login from './pages/Login';
 import Register from './pages/Register';
 
-const Routes = (): JSX.Element => {
+const Routes = () => {
   return (
     <Switch>
-      <Route path="/" exact component={Login} />
+      <Route path="/" exact component={Login}/>
       <Route path="/register" exact component={Register} />
       <Route path="/home" component={Home} />
       <Route path="/cart" component={Cart} />

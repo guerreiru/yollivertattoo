@@ -2,6 +2,7 @@ import React from "react";
 import { Link, useHistory } from "react-router-dom";
 import { FiLogIn } from "react-icons/fi";
 import { api } from "../../services/api";
+import { toast } from 'react-toastify';
 import "./styles.css";
 
 export default function Login() {
@@ -20,12 +21,11 @@ export default function Login() {
           localStorage.setItem("userLogado", "true");
           history.push("/home");
         } else {
-          alert(response.data.msg);
+          toast.error(response.data.msg)
         }
       })
       .catch((error) => {
         console.log(error);
-        alert("Erro no cadastro");
       });
   }
 

@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { FiArrowLeft } from 'react-icons/fi'
 import { api } from '../../services/api';
+import { toast } from 'react-toastify';
 import './styles.css'
 
 export default function Register() {
@@ -26,7 +27,7 @@ export default function Register() {
           setEmail('')
           setPassword('')
         } else {
-          alert(response.data.msg)
+          toast.error(response.data.msg)
         }
       })
       .catch((error) => {
