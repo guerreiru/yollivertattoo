@@ -1,0 +1,53 @@
+.new-product-container {
+  width: 100%;
+  max-width: 1120px;
+  height: 100vh;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+}
+
+.new-product-container .content {
+  width: 100%;
+  padding: 0 20px 20px 20px;
+  background: #282C34;
+  box-shadow: 0 0 100px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.new-product-container .content section {
+  width: 100%;
+  max-width: 380px;
+}
+
+.new-product-container .content section h1 {
+  margin: 20px 0 32px;
+  font-size: 32px;
+}
+
+.new-product-container .content section p {
+  font-size: 18px;
+  color: #737380;
+  line-height: 32px;
+}
+.new-product-container .content .form {
+  width: 100%;
+  max-width: 450px;
+}
+
+.new-product-container .content .form input, 
+.new-product-container .content .form textarea {
+  margin-top: 8px;
+}
+
+@media (max-width: 768px) {
+  .register-container .content {
+    padding: 60px;
+  }
+}
