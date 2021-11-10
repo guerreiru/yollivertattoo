@@ -4,7 +4,7 @@ import { api } from "../../services/api";
 import { ProductList } from "./styles";
 import { formatPrice } from "../../util/format";
 import { useCart } from "../../hooks/useCart";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { UserContext } from "../../context/UserContext";
 
 const Home = () => {
