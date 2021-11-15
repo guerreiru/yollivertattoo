@@ -1,87 +1,79 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import { FiArrowLeft } from 'react-icons/fi'
-import { api } from '../../services/api';
-import './styles.css'
+import React from "react";
+import { api } from "../../services/api";
+import { Content, Container } from "./styles";
+import Header from "../../components/Header";
 
-export default function Register() {
-  const [name, setName] = React.useState('')
-  const [phone, setPhone] = React.useState('')
-  const [email, setEmail] = React.useState('')
-  const [password, setPassword] = React.useState('')
+const Register = () => {
+  const [name, setName] = React.useState("");
+  const [price, setPrice] = React.useState("");
+  const [amount, setAmount] = React.useState("");
+  const [category, setCategory] = React.useState(["agulha"]);
 
-  async function handleRegister() {
+  function handleSelect({ target }) {
+    const selectedOptions = [...target.selectedOptions];
+    const options = selectedOptions.map((op) => op.value);
+    setCategory(options);
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault();
     const data = {
-      name,
-      phone,
-      email,
-      password,
-      admin: false
-    }
+      name: name.toLocaleLowerCase(),
+      price,
+      amount,
+      category,
+    };
 
-    api.post('users', data)
-      .then((response) => {
-        if (response.data.status === 200) {
-          setName('')
-          setEmail('')
-          setPassword('')
-        } else {
-          alert(response.data.msg)
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-        alert('Erro no cadastro')
-      })
+    api
+      .post("/produtos", data, {})
+      .then((res) => console.log(res))
+      .catch((er) => console.log(er));
   }
 
   return (
-    <div className="register-container">
-      <div className="content">
-        <section>
-          <h1>Cadastro</h1>
-        </section>
-        <div className="form" >
+    <Container>
+      <Header location="register" />
+      <Content>
+        <h1>Cadastrar Produto</h1>
+        <form onSubmit={handleSubmit}>
           <input
-            required
-            value={name}
-            onChange={e => setName(e.target.value)}
+            onChange={({ target }) => setName(target.value)}
             type="text"
             placeholder="Nome"
-            name="name"
+            id="name"
+            value={name}
           />
           <input
-            required
-            value={phone}
-            onChange={e => setPhone(e.target.value)}
-            type="tel"
-            placeholder="Telefone"
-            name="phone"
+            onChange={({ target }) => setPrice(target.value)}
+            type="number"
+            placeholder="Preço"
+            id="price"
+            value={price}
           />
           <input
-            required
-            value={email}
-            onChange={e => setEmail(e.target.value)}
-            type="email"
-            placeholder="E-mail"
-            name="email"
+            onChange={({ target }) => setAmount(target.value)}
+            type="number"
+            placeholder="Quantidade"
+            id="amount"
+            value={amount}
           />
-          <input
-            value={password}
-            onChange={e => setPassword(e.target.value)}
-            type="password"
-            placeholder="Senha"
-            name="password"
-          />
-          <button type="submit" className="button" onClick={handleRegister} >
-            Cadastrar
-          </button>
-          <Link className="back-link" to="/">
-          <FiArrowLeft size={16} color="#7159c1" />
-            Voltar pro home
-          </Link>
-        </div>
-      </div>
-    </div>
-  )
-}
+          <select
+            name="category"
+            value={category}
+            onChange={handleSelect}
+            multiple={true}
+          >
+            <option value="agulha">Agulha</option>
+            <option value="batoque">Batoque</option>
+            <option value="bico">Bico</option>
+            <option value="tinta">Tinta</option>
+          </select>
+
+          <button>Cadastrar</button>
+        </form>
+      </Content>
+    </Container>
+  );
+};
+
+export default Register;

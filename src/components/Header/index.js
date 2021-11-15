@@ -1,36 +1,40 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { MdShoppingBasket } from "react-icons/md";
-import { Container, Cart } from "./styles";
+import { Container, Content, Logo, Cart, InputGroup } from "./styles";
 import { useCart } from "../../hooks/useCart";
 
-const Header = () => {
+function Header({ busca, buscarProduto, limparBusca, setBusca, location }) {
   const { cart } = useCart();
   const cartSize = React.useMemo(() => cart.length, [cart]);
 
   return (
     <Container>
-      <div className="linksHeader">
-        <Link to="/home">
-          <span className="logo">Yolliver</span>
-        </Link>
-
-        <Link to="/newproduct">
-          <span className="newProduct">Cadastrar Produto</span>
-        </Link>
-      </div>
-
-      <Cart to="/cart">
-        <div>
-          <strong>Meu carrinho</strong>
-          <span data-testid="cart-size">
-            {cartSize === 1 ? `${cartSize} item` : `${cartSize} itens`}
-          </span>
-        </div>
-        <MdShoppingBasket size={36} color="#FFF" />
-      </Cart>
+      <Content>
+        <Logo to="/">Yolliver Tattoo</Logo>
+        {!location ? <Link to="/register">Cadastrar Produto</Link> : null}
+        {!location ? (
+          <InputGroup>
+            <input
+              value={busca}
+              onChange={({ target }) => setBusca(target.value)}
+            />
+            <button onClick={buscarProduto}>Buscar</button>
+            <button onClick={limparBusca}>Limpar</button>
+          </InputGroup>
+        ) : null}
+        <Cart to="/cart">
+          <div>
+            <strong>Meu carrinho</strong>
+            <span data-testid="cart-size">
+              {cartSize === 1 ? `${cartSize} item` : `${cartSize} itens`}
+            </span>
+          </div>
+          <MdShoppingBasket size={36} color="#FFF" />
+        </Cart>
+      </Content>
     </Container>
   );
-};
+}
 
 export default Header;

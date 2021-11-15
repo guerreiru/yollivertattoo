@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useContext, useState } from 'react';
+import { createContext, useContext, useState } from 'react';
 import { toast } from 'react-toastify';
 import { api } from '../services/api';
 
@@ -21,9 +21,9 @@ export function CartProvider({ children }) {
         product => product.id === productId
       );
 
-      const stock = await api.get(`/stock/amount/${productId}`)
+      const stock = await api.get(`/produtos/${productId}`)
 
-      const stockAmount = stock.data;
+      const stockAmount = stock.data.amount;
       const currentAmount = productExists ? productExists.amount : 0;
       const amount = currentAmount + 1;
 
@@ -35,7 +35,7 @@ export function CartProvider({ children }) {
       if (productExists) {
         productExists.amount = amount;
       } else {
-        const product = await api.get(`/products/${productId}`);
+        const product = await api.get(`/produtos/${productId}`);
         const newProduct = {
           ...product.data,
           amount: 1,
@@ -78,8 +78,8 @@ export function CartProvider({ children }) {
         return;
       }
 
-      const stock = await api.get(`stock/amount/${productId}`);
-      const stockAmount = stock.data;
+      const stock = await api.get(`produtos/${productId}`);
+      const stockAmount = stock.data.amount;
 
       if (amount > stockAmount) {
         toast.error('Quantidade solicitada fora de estoque');
