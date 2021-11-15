@@ -17,7 +17,9 @@ function Header({ busca, buscarProduto, limparBusca, setBusca, location }) {
           <InputGroup>
             <input
               value={busca}
-              onChange={({ target }) => setBusca(target.value)}
+              onChange={({ target }) =>
+                setBusca(target.value.toLocaleLowerCase())
+              }
             />
             <button onClick={buscarProduto}>Buscar</button>
             <button onClick={limparBusca}>Limpar</button>
