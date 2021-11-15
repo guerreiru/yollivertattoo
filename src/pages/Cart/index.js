@@ -51,7 +51,6 @@ const Cart = () => {
         <ProductTable>
           <thead>
             <tr>
-              <th aria-label="product image" />
               <th>PRODUTO</th>
               <th>QTD</th>
               <th>SUBTOTAL</th>
@@ -62,7 +61,7 @@ const Cart = () => {
             {cartFormatted.map((product) => (
               <tr key={product.id} data-testid="product">
                 <td>
-                  <strong>{product.title}</strong>
+                  <strong>{product.name}</strong>
                   <span>{product.priceFormatted}</span>
                 </td>
                 <td>
