@@ -1,9 +1,11 @@
 import React from "react";
+import { MdAddShoppingCart, MdDelete } from "react-icons/md";
+import { GoPencil } from "react-icons/go";
 import { Card, Footer } from "./styles";
-import { MdAddShoppingCart } from "react-icons/md";
 import { formatPrice } from "../../util/formatPrice";
 import ModalConfirm from "../ModalConfirm";
 import { useCart } from "../../hooks/useCart";
+import logo from "../../assets/placeholder.png";
 
 function CardProduct({ data, edit, del }) {
   const [modalConfirmIsOpen, setModalConfirmIsOpen] = React.useState(false);
@@ -34,25 +36,23 @@ function CardProduct({ data, edit, del }) {
         del={del}
       />
       <Card>
-        <div>
-          <button onClick={() => edit(data)}>Editar</button>
-          <button onClick={() => setModalConfirmIsOpen(true)}>Remover</button>
-        </div>
-        <p>Nome: {data.name}</p>
-        <p>Preço: {formatPrice(data.price)}</p>
+        <img src={logo} alt={data.name} />
+        <p>{data.name}</p>
+        <p>{formatPrice(data.price)}</p>
         <p>Estoque: {data.amount}</p>
         <p>Categoria: {data.category}</p>
         <Footer>
-          <button
-            type="button"
-            onClick={() => handleAddProduct(data.id)}
-          >
-            <div>
-              <MdAddShoppingCart size={16} color="#FFF" />
-              {cartItemsAmount[data.id] || 0}
-            </div>
+          <button type="button" onClick={() => handleAddProduct(data.id)}>
+            <MdAddShoppingCart size={16} color="#FFF" />
+            <span>{cartItemsAmount[data.id] || 0}</span>
+          </button>
 
-            <span>ADICIONAR AO CARRINHO</span>
+          <button type="button" onClick={() => edit(data)}>
+            <GoPencil size={16} color="#fff" />
+          </button>
+
+          <button type="button" onClick={() => setModalConfirmIsOpen(true)}>
+            <MdDelete size={16} color="#fff" />
           </button>
         </Footer>
       </Card>

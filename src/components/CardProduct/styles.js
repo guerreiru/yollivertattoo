@@ -11,6 +11,11 @@ export const Card = styled.div`
   display: flex;
   flex-direction: column;
 
+  &:hover {
+    transform: scale(105%);
+    transition: 0.3s linear;
+  }
+
   p {
     margin-block-start: 0.1em;
     margin-block-end: 0.1em;
@@ -21,7 +26,7 @@ export const Card = styled.div`
     display: flex;
 
     button {
-      padding: 10px 20px;
+      padding: 5px 10px;
     }
 
     button + button {
@@ -32,35 +37,26 @@ export const Card = styled.div`
 
 export const Footer = styled.span`
   margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+  gap: 4px;
+
   button {
     background: #7159c1;
     color: #fff;
-    border: 0;
     border-radius: 4px;
-    overflow: hidden;
-    margin-top: auto;
-
     display: flex;
+    justify-content: center;
     align-items: center;
-    transition: background 0.2s;
+    padding: 12px;
+    flex: 1;
 
     &:hover {
       background: rgba(113, 89, 193, 0.9);
     }
 
-    div {
-      display: flex;
-      align-items: center;
-      padding: 12px;
-      background: rgba(0, 0, 0, 0.1);
-
-      svg {
-        margin-right: 5px;
-      }
-    }
-
     span {
-      flex: 1;
+      margin-right: 5px;
       text-align: center;
       font-weight: bold;
     }

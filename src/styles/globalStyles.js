@@ -25,6 +25,9 @@ export default createGlobalStyle`
     margin: 0;
     font-family: 'Poppins', sans-serif;
   }
+  img {
+    width: 100%;
+  }
   input, select, text-area {
     font-family: 'Poppins', sans-serif;
   }

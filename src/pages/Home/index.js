@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { api } from "../../services/api";
 import HomeComponent from "../../components/HomeComponent";
 
+
 function Home() {
   const [loading, setLoading] = useState(null);
   const [produtos, setProdutos] = useState([]);

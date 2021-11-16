@@ -6,7 +6,6 @@ import ModalEditProduct from "../ModalEditProduct";
 import { Container, Content, ListCategory } from "./styles";
 
 function HomeComponent(props) {
-
   return (
     <Container>
       <ModalEditProduct
@@ -40,13 +39,12 @@ function HomeComponent(props) {
           </ul>
         </ListCategory>
         {props.produtos.map((produto) => (
-          <div key={produto.id}>
-            <CardProduct
-              data={produto}
-              edit={props.editarProduto}
-              del={props.deleteProduct}
-            />
-          </div>
+          <CardProduct
+            key={produto.id}
+            data={produto}
+            edit={props.editarProduto}
+            del={props.deleteProduct}
+          />
         ))}
       </Content>
     </Container>
