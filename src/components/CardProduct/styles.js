@@ -12,8 +12,7 @@ export const Card = styled.div`
   flex-direction: column;
 
   &:hover {
-    transform: scale(105%);
-    transition: 0.3s linear;
+    filter: brightness(0.9);
   }
 
   p {
